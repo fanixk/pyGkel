@@ -6,10 +6,10 @@ class Otenet:
     def __init__(self, username, password):
         self.msg = Browser()
         self.msg.set_handle_robots(False)
-        self.username=username
-        self.password=password
-        self.daily=-1
-        self.monthly=-1
+        self.username = username
+        self.password = password
+        self.daily = -1
+        self.monthly = -1
     
     def login(self):
         self.msg.open('http://tools.otenet.gr/tools/index.do')
@@ -19,10 +19,10 @@ class Otenet:
         self.msg.submit()
     
     def check_limit(self):
-        content=self.parser()
-        self.daily=self.get_daily_remaining(content)
+        content = self.parser()
+        self.daily = self.get_daily_remaining(content)
         #print 'Logged in...'
-        self.monthly=self.get_monthly_remaining(content)
+        self.monthly = self.get_monthly_remaining(content)
         if self.daily in [-1,5] or self.monthly in [-1,100]:
             print 'Orio SMS'
             self._exit_app()
@@ -35,7 +35,7 @@ class Otenet:
         if not number.startswith('69') or len(number) != 10:
             print 'Mi egkyros arithmos tilefonou.'
             self._exit_app()
-        if len(message)>=160:
+        if len(message) >= 160:
             print 'Orio mhkous sms.'
             self._exit_app()
         self.msg.open('http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23')
@@ -52,14 +52,14 @@ class Otenet:
            
     def get_daily_remaining(self,content):
         content = re.search(r'<input type="hidden" name="todaySMS" value="(\d+)">', content)
-        if content==None:
+        if content == None:
             print 'Login Error.'
             self._exit_app()
         return int(content.group(1))
             
     def get_monthly_remaining(self,content):
         content = re.search(r'<input type="hidden" name="monthSMS" value="(\d+)">', content)
-        if content==None:
+        if content == None:
             print 'Login Error.'
             self._exit_app()
         return int(content.group(1))
