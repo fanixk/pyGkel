@@ -4,10 +4,14 @@ import sys,signal
 import urllib
 import time
 from getpass import getpass
+#import re
 
 def get_data():
     resp = urllib.urlopen('https://gkel.teipir.gr/gkelv2/prog_process/progress-e.2011.html')
     resp = resp.read()
+    #last_modified = re.search(r'(\d+)/(\d+)/(\d+) (\d+):(\d+):(\d+)',resp)
+    #last_modified = last_modified.group()
+    #return last_modified
     sub = '\xf4\xe5\xeb\xe5\xf5\xf4\xe1\xdf\xe1 \xea\xe1\xf4\xe1\xf7\xfe\xf1\xe7\xf3\xe7 : '
     start_index = resp.index(sub)+len(sub)
     resp = resp[start_index:start_index+19]
