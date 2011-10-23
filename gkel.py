@@ -44,6 +44,7 @@ def send_sms():
         sys.exit(0)
 
     check_for_new()
+    otenet.login()  #relog in case of logout
     otenet.send_sms(number,'Nea kataxorisi bathmologias sto Gkel')
 
 def send_mail():
