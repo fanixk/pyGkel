@@ -15,9 +15,11 @@ def get_data():
 
 def check_for_new():
     last = new = get_data()
-    while(new == last):
+    while(True):
         new = get_data()
         print new
+        if new != last:
+            break
         time.sleep(int(sys.argv[1]))
     print 'Nea kataxorisi! ' + new
 
