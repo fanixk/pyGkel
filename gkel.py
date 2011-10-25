@@ -37,12 +37,13 @@ def send_sms():
     otenet = Otenet(username,password)
     otenet.login()
     otenet.check_limit()
-
-    number = raw_input('Kinhto: ')                
-    if not number.startswith('69') or len(number) !=  10:    #sanity check
+    
+    while(True):
+        number = raw_input('Kinhto: ')                
+        if number.startswith('69') and len(number) ==  10:    #sanity check
+            break
         print 'Mi egkyros arithmos tilefonou.'
-        sys.exit(0)
-
+        
     check_for_new()
     otenet.login()  #relog in case of logout
     otenet.send_sms(number,'Nea kataxorisi bathmologias sto Gkel')
