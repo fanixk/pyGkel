@@ -68,7 +68,12 @@ def send_mail():
     check_for_new()
     mail_text = MIMEText('Nea Kataxorisi bathmologias sto Gkel')
     mail_text['Subject'] = 'Gkel'
-    server.sendmail('gkel@gkel.gr', mail, mail_text.as_string())
+    try:
+        server.sendmail('gkel@gkel.gr', mail, mail_text.as_string())
+    except smtplib.SMTPServerDisconnected:
+        server.starttls()
+        server.login(username,password)
+        server.sendmail('gkel@gkel.gr', mail, mail_text.as_string())
     server.quit()  
 
 if __name__ == '__main__':
