@@ -71,7 +71,6 @@ def send_mail():
     try:
         server.sendmail('gkel@gkel.gr', mail, mail_text.as_string())
     except smtplib.SMTPServerDisconnected:
-        server.starttls()
         server.login(username,password)
         server.sendmail('gkel@gkel.gr', mail, mail_text.as_string())
     server.quit()  
